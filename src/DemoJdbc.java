@@ -34,8 +34,11 @@ public class DemoJdbc {
 //        5.	Create statement
 
         Statement stmt;
+        //Second statement
+        Statement stmt2;
         try {
             stmt = con.createStatement();
+            stmt2 = con.createStatement();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -43,9 +46,15 @@ public class DemoJdbc {
 //        6.	Execute Statement
 
         String query = "SELECT * FROM student WHERE id = 1";
+        //Query that fetch multiple data
+        String query2 = "SELECT * FROM student";
+
         ResultSet rs;
+        ResultSet rs2;
         try {
             rs = stmt.executeQuery(query);
+            //Get the result from second query
+            rs2 = stmt2.executeQuery(query2);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -53,6 +62,20 @@ public class DemoJdbc {
 //        7.    Process the Result
 
         try {
+            while (rs2.next()) {
+                System.out.print(rs2.getString("id") + " - ");
+                System.out.print(rs2.getString(2) + " - ");
+                System.out.println(rs2.getInt(3));
+            }
+
+            //Print using for loop
+//            while (rs2.next()) {
+//                for (int i = 0; i < rs2.getMetaData().getColumnCount(); i++) {
+//                    System.out.print(rs2.getString(i + 1) + " ");
+//                }
+//                System.out.println();//
+//            }
+
             rs.next();
             System.out.println(rs.getString("name"));
             System.out.println(rs.getString(3));
