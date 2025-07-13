@@ -11,6 +11,8 @@ public class InsertDataDemo {
 
         Connection con = DriverManager.getConnection(url, username, password);
 
+        System.out.println("Connection Established");
+
         Statement stmt = con.createStatement();
 
         String query = "INSERT INTO student (name, marks) VALUES ('Malinda', 87)";
@@ -21,8 +23,6 @@ public class InsertDataDemo {
 
         con.close();
 
-
-
-
+        System.out.println("Connection closed");
     }
 }
